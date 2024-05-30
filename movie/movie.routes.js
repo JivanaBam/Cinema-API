@@ -31,6 +31,7 @@ router.post(
     const loggedInUserId = req.loggedInUserId;
 
     newMovie.adminId = loggedInUserId;
+    newMovie.duration = newMovie.duration / 60;
 
     // create movie
     await Movie.create(newMovie);
@@ -56,7 +57,7 @@ router.post(
     if (!movie) {
       return res.status(404).send({ message: "Movie doesnot exist." });
     }
-
+    // movie.duration = duration / 60;
     //send res
     return res.status(200).send({ message: "success", movieDetails: movie });
   }
@@ -188,7 +189,9 @@ router.post(
           country: 1,
           genre: 1,
           description: { $substr: ["$description", 0, 100] },
-          Image: 1,
+          image: 1,
+          releasedYear: 1,
+          duration: 1,
         },
       },
     ]);

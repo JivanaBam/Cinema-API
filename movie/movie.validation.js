@@ -38,43 +38,42 @@ export const addMovieValidationSchema = yup.object({
       "Canada",
     ]),
   genre: yup
-    .string()
+    .array()
     .required("Genre is required.")
-    .trim()
-    .oneOf([
-      "comedy",
-      "action",
-      "horror",
-      "science-fiction",
-      "drama",
-      "thriller",
-      "motivational",
-      "crime",
-      "animation",
-      "historical",
-      "documentary",
-      "romance",
-      "adventure",
-      "musical",
-      "experimental",
-      "sports",
-      "biography",
-      "mystery",
-      "spy",
-      "war",
-      "art",
-    ]),
+    .of(
+      yup
+        .string()
+        .oneOf([
+          "comedy",
+          "action",
+          "horror",
+          "science-fiction",
+          "drama",
+          "thriller",
+          "motivational",
+          "crime",
+          "animation",
+          "historical",
+          "documentary",
+          "romance",
+          "adventure",
+          "musical",
+          "experimental",
+          "sports",
+          "biography",
+          "mystery",
+          "spy",
+          "war",
+          "art",
+        ])
+    ),
   description: yup
     .string()
     .trim()
     .required("Description is required.")
     .min(100, "Description must be at least 100 characters.")
     .max(1000, "Description must be at max 1000 characters."),
-  releasedYear: yup
-    .date()
-    .required("Released year is required.")
-    .min(1888, "Released year must be at least 1888.")
-    .max(currentYear, `Released year cannot be later than ${currentYear}.`),
+  releasedYear: yup.number().required("Released year is required."),
   duration: yup
     .number()
     .required("Duration is required.")
