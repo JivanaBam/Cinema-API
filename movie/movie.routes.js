@@ -197,14 +197,16 @@ router.post(
     ]);
 
     // calculate page
-    // const totalMovies = await Movie.find({
-    //   adminId: req.loggedInUserId,
-    // }).countDocuments();
+    const totalMovies = await Movie.find({
+      adminId: req.loggedInUserId,
+    }).countDocuments();
 
-    // const totalPages = math.ceil(totalMovies / limit);
+    const totalPages = Math.ceil(totalMovies / limit);
 
     // send res
-    return res.status(200).send({ message: "success", movieLists: movies });
+    return res
+      .status(200)
+      .send({ message: "success", movieLists: movies, totalPages });
   }
 );
 
@@ -238,13 +240,22 @@ router.post(
           country: 1,
           genre: 1,
           description: { $substr: ["$description", 0, 100] },
-          Image: 1,
+          image: 1,
+          releasedYear: 1,
+          duration: 1,
         },
       },
     ]);
 
+    // calculate page
+    const totalMovies = await Movie.find().countDocuments();
+
+    const totalPages = Math.ceil(totalMovies / limit);
+
     // send res
-    return res.status(200).send({ message: "success", movieLists: movies });
+    return res
+      .status(200)
+      .send({ message: "success", movieLists: movies, totalPages });
   }
 );
 
