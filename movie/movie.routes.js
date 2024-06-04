@@ -31,7 +31,12 @@ router.post(
     const loggedInUserId = req.loggedInUserId;
 
     newMovie.adminId = loggedInUserId;
-    newMovie.duration = newMovie.duration / 60;
+
+    // convert duration from minutes to "X hr Y min"
+    const totalMinutes = newMovie.duration;
+    const hours = Math.floor(totalMinutes / 60);
+    const minutes = totalMinutes % 60;
+    newMovie.duration = `${hours} hr ${minutes} min`;
 
     // create movie
     await Movie.create(newMovie);

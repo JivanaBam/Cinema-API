@@ -1,7 +1,7 @@
 import yup from "yup";
 
 // Get the current year
-const currentYear = new Date().getFullYear();
+// const currentYear = new Date().getFullYear();
 
 export const addMovieValidationSchema = yup.object({
   name: yup
@@ -40,6 +40,7 @@ export const addMovieValidationSchema = yup.object({
   genre: yup
     .array()
     .required("Genre is required.")
+    .min(1, "Must contain at least one genre.")
     .of(
       yup
         .string()
@@ -65,6 +66,7 @@ export const addMovieValidationSchema = yup.object({
           "spy",
           "war",
           "art",
+          "science",
         ])
     ),
   description: yup
@@ -73,12 +75,12 @@ export const addMovieValidationSchema = yup.object({
     .required("Description is required.")
     .min(100, "Description must be at least 100 characters.")
     .max(1000, "Description must be at max 1000 characters."),
-  releasedYear: yup.number().required("Released year is required."),
+  releasedYear: yup.date().required("Released year is required."),
   duration: yup
-    .number()
+    .string()
     .required("Duration is required.")
-    .min(1, "Duration must be at least 1 minute.")
-    .integer("Duration must be an integer."),
+    .min(1, "Duration must be at least 1 minute."),
+  // .integer("Duration must be an integer."),
   image: yup.string().nullable(),
 });
 

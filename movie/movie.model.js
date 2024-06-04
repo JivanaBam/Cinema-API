@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 // Get the current year within the schema definition scope
-// const currentYear = new Date().getFullYear();
+const currentYear = new Date().getFullYear();
 
 // set schema
 const movieSchema = new mongoose.Schema({
@@ -45,7 +45,6 @@ const movieSchema = new mongoose.Schema({
   genre: {
     type: [String],
     required: true,
-    trim: true,
     enum: [
       "comedy",
       "action",
@@ -82,11 +81,12 @@ const movieSchema = new mongoose.Schema({
     minlength: 100,
   },
   releasedYear: {
-    type: Number,
+    type: Date,
     required: true,
+    currentYear: true,
   },
   duration: {
-    type: Number,
+    type: String,
     required: true,
     min: 1, // Duration should be at least 1 minute
   },
