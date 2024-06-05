@@ -80,7 +80,7 @@ export const addMovieValidationSchema = yup.object({
     .string()
     .required("Duration is required.")
     .min(1, "Duration must be at least 1 minute."),
-  // .integer("Duration must be an integer."),
+
   image: yup.string().nullable(),
 });
 
