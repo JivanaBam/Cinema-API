@@ -11,6 +11,7 @@ import {
 } from "./movie.validation.js";
 import Movie from "./movie.model.js";
 import { validateIdFromReqParams } from "../middleware/validate.id.middleware.js";
+import { convertSecondToHourMinSecFormat } from "../utils/convertSecondToHourMinSecFormat.js";
 
 const router = express.Router();
 
@@ -32,12 +33,6 @@ router.post(
 
     newMovie.adminId = loggedInUserId;
 
-    // convert duration from minutes to "X hr Y min"
-    const totalMinutes = newMovie.duration;
-    const hours = Math.floor(totalMinutes / 60);
-    const minutes = totalMinutes % 60;
-    newMovie.duration = `${hours} hr ${minutes} min`;
-
     // create movie
     await Movie.create(newMovie);
 
@@ -56,13 +51,19 @@ router.post(
     const movieId = req.params.id;
 
     // find movie
-    const movie = await Movie.findOne({ _id: movieId });
+    const movie = await Movie.findOne({ _id: movieId }).lean();
 
     // if not movie, throw error
     if (!movie) {
       return res.status(404).send({ message: "Movie doesnot exist." });
     }
-    // movie.duration = duration / 60;
+
+    // convert second into hour:min:sec
+    const formattedDuration = convertSecondToHourMinSecFormat(movie.duration);
+
+    movie.duration = formattedDuration;
+    // console.log(formattedDuration);
+
     //send res
     return res.status(200).send({ message: "success", movieDetails: movie });
   }
@@ -109,12 +110,7 @@ router.put(
       { _id: movieId },
       {
         $set: {
-          name: newValues.name,
-          leadActor: newValues.leadActor,
-          supportingActor: newValues.supportingActor,
-          country: newValues.country,
-          genre: newValues.genre,
-          description: newValues.description,
+          ...newValues,
         },
       }
     );
