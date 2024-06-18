@@ -14,6 +14,8 @@ app.use(express.json());
 
 const corsOptions = {
   origin: ["https://cinema-two-mu.vercel.app/"],
+  methods: "GET,PUT,POST,DELETE",
+  credentials: true, // Allow cookies to be sent
   optionsSuccessStatus: 200,
 };
 
