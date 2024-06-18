@@ -16,6 +16,7 @@ const corsOptions = {
   origin: ["https://cinema-two-mu.vercel.app/"],
   methods: "GET,PUT,POST,DELETE",
   credentials: true, // Allow cookies to be sent
+  allowedHeaders: ['Content-Type', 'Authorization'], // Allow these headers
   optionsSuccessStatus: 200,
 };
 
