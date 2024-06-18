@@ -13,7 +13,7 @@ app.use(express.json());
 // Cross origin Resource Sharing
 
 const corsOptions = {
-  origin: ["https://cinema-two-mu.vercel.app/"],
+  origin: ["https://cinema-two-mu.vercel.app"],
   methods: "GET,PUT,POST,DELETE",
   credentials: true, // Allow cookies to be sent
   allowedHeaders: ['Content-Type', 'Authorization'], // Allow these headers
