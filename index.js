@@ -13,7 +13,7 @@ app.use(express.json());
 // Cross origin Resource Sharing
 
 const corsOptions = {
-  origin: ["http://cinema-two-mu.vercel.app/"],
+  origin: ["https://cinema-two-mu.vercel.app/"],
   optionsSuccessStatus: 200,
 };
 
