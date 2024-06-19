@@ -26,7 +26,7 @@ app.use(cors(corsOptions));
 connectDB();
 
 // Serve static files from the "public" directory
-app.use(express.static(path.join(__dirname, 'src')));
+//app.use(express.static(path.join(__dirname, 'src')));
 
 // register routes
 app.use(userRoutes);
