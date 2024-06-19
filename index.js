@@ -3,7 +3,6 @@ import connectDB from "./connect.db.js";
 import userRoutes from "./user/user.routes.js";
 import movieRoutes from "./movie/movie.routes.js";
 import cors from "cors";
-import path from "path";
 
 const app = express();
 
