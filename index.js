@@ -35,6 +35,9 @@ connectDB();
 app.use(userRoutes);
 app.use(movieRoutes);
 
+// Handle preflight requests
+app.options('*', cors(corsOptions));
+
 //network and sever connection
 const PORT = process.env.API_PORT;
 app.listen(PORT, () => {
