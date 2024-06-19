@@ -24,19 +24,12 @@ const corsOptions = {
 // Enable CORS for all routes
 app.use(cors(corsOptions));
 
-// Serve static files from the "public" directory
-app.use(express.static(path.join(__dirname, 'src')));
-
-
 // database connection
 connectDB();
 
 // register routes
 app.use(userRoutes);
 app.use(movieRoutes);
-
-// Handle preflight requests
-app.options('*', cors(corsOptions));
 
 //network and sever connection
 const PORT = process.env.API_PORT;
