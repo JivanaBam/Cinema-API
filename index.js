@@ -5,6 +5,8 @@ import movieRoutes from "./movie/movie.routes.js";
 import cors from "cors";
 
 const app = express();
+const cors = require('cors');
+const path = require('path');
 
 // to make app undersatnd json
 app.use(express.json());
@@ -22,11 +24,12 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-// database connection
-connectDB();
-
 // Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, 'src')));
+
+
+// database connection
+connectDB();
 
 // register routes
 app.use(userRoutes);
