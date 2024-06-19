@@ -9,6 +9,9 @@ const app = express();
 // to make app undersatnd json
 app.use(express.json());
 
+// Serve static files from the "public" directory
+app.use(express.static(path.join(__dirname, 'public')));
+
 // enable cors
 // Cross origin Resource Sharing
 
