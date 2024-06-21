@@ -12,15 +12,15 @@ app.use(express.json());
 // enable cors
 // Cross origin Resource Sharing
 
-const corsOptions = {
-  origin: ["https://cinema-two-mu.vercel.app"],
-  methods: "GET,PUT,POST,DELETE",
-  credentials: true, // Allow cookies to be sent
-  optionsSuccessStatus: 200,
-};
+// const corsOptions = {
+//   origin: ["https://cinema-two-mu.vercel.app"],
+//   methods: "GET,PUT,POST,DELETE",
+//   credentials: true, // Allow cookies to be sent
+//   optionsSuccessStatus: 200,
+// };
 
-app.use(cors(corsOptions));
-// app.use(cors())
+// app.use(cors(corsOptions));
+app.use(cors());
 
 // database connection
 connectDB();
